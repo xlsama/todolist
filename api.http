@@ -1,0 +1,17 @@
+GET http://localhost:3000/
+
+###
+
+GET http://localhost:3000/todos
+
+###
+
+POST http://localhost:3000/todo
+
+{
+  "content": "Buy groceriesdf12s"
+}
+
+###
+
+DELETE http://localhost:3000/todo/1
