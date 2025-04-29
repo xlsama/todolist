@@ -1,3 +1,5 @@
+import { PiniaColada } from '@pinia/colada'
+import { createPinia } from 'pinia'
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from 'vue-router/auto-routes'
@@ -13,5 +15,7 @@ const router = createRouter({
 const app = createApp(App)
 
 app.use(router)
+app.use(createPinia())
+app.use(PiniaColada, {})
 
 app.mount('#app')

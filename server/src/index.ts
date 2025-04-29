@@ -25,12 +25,12 @@ app.use(async (c, next) => {
 })
 
 app.get('/', (c) => {
-  return c.text('Hello Hono!')
+  return c.text('Hello!')
 })
 
 app.get('/todos', async (c) => {
   const supabase = getSupabaseClient()
-  const { data, error } = await supabase.from('todo').select()
+  const { data, error } = await supabase.from('todo').select().order('created_at', { ascending: false })
 
   if (error) {
     throw new HTTPException(500, { message: error.message })
