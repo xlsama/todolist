@@ -1,12 +1,12 @@
-GET http://localhost:3000/
+GET http://localhost:8787/
 
 ###
 
-GET http://localhost:3000/todos
+GET http://localhost:8787/todos
 
 ###
 
-POST http://localhost:3000/todo
+POST http://localhost:8787/todo
 
 {
   "content": "Buy 123"
@@ -14,4 +14,4 @@ POST http://localhost:3000/todo
 
 ###
 
-DELETE http://localhost:3000/todo/1
+DELETE http://localhost:8787/todo/1
