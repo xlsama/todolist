@@ -3,8 +3,9 @@
   "type": "module",
   "packageManager": "pnpm@10.10.0",
   "scripts": {
-    "dev": "pnpm --filter server dev",
-    "build": "pnpm --filter server build",
+    "dev": "pnpm -r dev",
+    "build": "pnpm --filter client build",
+    "build-server": "pnpm --filter server build",
     "lint": "eslint --fix .",
     "postinstall": "simple-git-hooks"
   },
