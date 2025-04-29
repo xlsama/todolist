@@ -1,3 +1,4 @@
+/* eslint-disable node/prefer-global/process */
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = 'https://yhptstizqxhcvrgyrgpa.supabase.co'

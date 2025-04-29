@@ -9,7 +9,7 @@ GET http://localhost:3000/todos
 POST http://localhost:3000/todo
 
 {
-  "content": "Buy groceriesdf12s"
+  "content": "Buy 123"
 }
 
 ###
