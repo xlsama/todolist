@@ -21,5 +21,6 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     ScrollArea: typeof import('./components/ui/scroll-area/ScrollArea.vue')['default']
     ScrollBar: typeof import('./components/ui/scroll-area/ScrollBar.vue')['default']
+    Sonner: typeof import('./components/ui/sonner/Sonner.vue')['default']
   }
 }

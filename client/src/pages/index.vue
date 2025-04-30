@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { Toaster } from '@/components/ui/sonner'
 import { request } from '@/utils'
 import { useQuery } from '@pinia/colada'
 import dayjs from 'dayjs'
 import { Loader, Plus, Trash } from 'lucide-vue-next'
+import { toast } from 'vue-sonner'
 
 const content = ref('')
 const adding = ref(false)
@@ -18,6 +20,11 @@ const { data: welcome } = useQuery({
 })
 
 async function handleAdd() {
+  if (!content.value) {
+    toast.error('Please input content')
+    return
+  }
+
   adding.value = true
   await request('/api/todo', {
     method: 'POST',
@@ -32,19 +39,18 @@ async function handleAdd() {
 </script>
 
 <template>
-  <div class="flex flex-col gap-5 justify-center h-screen w-100 mx-auto">
+  <div class="flex flex-col pt-20 gap-5 h-screen w-100 mx-auto">
     <h3 class="scroll-m-20 text-2xl font-semibold tracking-tight text-center">
       {{ welcome }}
     </h3>
-
     <div class="flex gap-2">
-      <Input v-model="content" type="text" placeholder="content" @keyup.enter="handleAdd" />
+      <Input v-model="content" type="text" placeholder="please input content" @keyup.enter="handleAdd" />
       <Button variant="outline" size="icon" :disabled="adding" @click="handleAdd">
         <Plus class="w-4 h-4" />
       </Button>
     </div>
     <div class="flex flex-col gap-2 items-center">
-      <Loader v-if="isLoading" class="animate-spin mt-10" />
+      <Loader v-if="isLoading" class="animate-spin mt-20" />
       <Card v-for="todo in todos" v-else :key="todo.id" class="w-full">
         <CardContent class="flex flex-col gap-3">
           <div class="flex justify-between items-center">
@@ -55,6 +61,7 @@ async function handleAdd() {
                 await request(`/api/todo/${todo.id}`, {
                   method: 'DELETE',
                 })
+                toast.success('Delete success')
 
                 refetch()
               }"
@@ -69,4 +76,6 @@ async function handleAdd() {
       </Card>
     </div>
   </div>
+
+  <Toaster position="top-right" rich-colors />
 </template>
