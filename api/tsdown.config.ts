@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsdown/config'
 
 export default defineConfig({
-  entry: 'src/index.ts',
+  entry: 'index.ts',
   dts: true,
   shims: true,
 })
