@@ -1,17 +1,25 @@
-GET http://localhost:3000/
+GET http://localhost:3000/api
 
 ###
 
-GET http://localhost:3000/todos
+GET http://localhost:3000/api/todos
 
 ###
 
-POST http://localhost:3000/todo
+POST http://localhost:3000/api/todo
 
 {
-  "content": "Buy 123"
+  "content": "Buy 12345"
 }
 
 ###
 
-DELETE http://localhost:3000/todo/1
+PUT http://localhost:3000/api/todo/10
+
+{
+  "isDone": true
+}
+
+###
+
+DELETE http://localhost:3000/api/todo/1

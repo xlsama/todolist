@@ -36,6 +36,16 @@ async function handleAdd() {
   content.value = ''
   refetch()
 }
+
+async function handleUpdate(id: number, data: any) {
+  await request(`/api/todo/${id}`, {
+    method: 'PUT',
+    body: data,
+  })
+  toast.success('Update success')
+
+  refetch()
+}
 </script>
 
 <template>
@@ -54,7 +64,13 @@ async function handleAdd() {
       <Card v-for="todo in todos" v-else :key="todo.id" class="w-full">
         <CardContent class="flex flex-col gap-3">
           <div class="flex justify-between items-center">
-            <div>{{ todo.content }}</div>
+            <div class="flex items-center gap-2">
+              <Checkbox
+                :model-value="todo.isDone"
+                @update:model-value="handleUpdate(todo.id, { isDone: !todo.isDone })"
+              />
+              <span>{{ todo.content }}</span>
+            </div>
             <Button
               variant="outline" size="icon"
               @click="async () => {
@@ -70,7 +86,7 @@ async function handleAdd() {
             </Button>
           </div>
           <div class="text-xs text-muted-foreground text-right">
-            {{ dayjs(todo.created_at).format('YYYY-MM-DD HH:mm:ss') }}
+            {{ dayjs(todo.updatedAt).format('YYYY-MM-DD HH:mm:ss') }}
           </div>
         </CardContent>
       </Card>
