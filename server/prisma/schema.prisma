@@ -18,7 +18,7 @@ model Todo {
   id    Int     @id @default(autoincrement())
   content String
   createdAt DateTime @default(now())
-  updatedAt DateTime
+  updatedAt DateTime @default(now())
   isDone Boolean @default(false)
 }
 
