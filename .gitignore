@@ -5,6 +5,3 @@ api/generated
 api/.env
 
 .env.local
-.dev.vars
-.wrangler
-.vercel

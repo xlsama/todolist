@@ -4,13 +4,12 @@ import { withAccelerate } from '@prisma/extension-accelerate'
 import { Hono } from 'hono'
 import { logger } from 'hono/logger'
 import { logger as rslog } from 'rslog'
-import { PrismaClient } from './generated/client/index.js'
+import { PrismaClient } from '../generated/client/index.js'
 
 const prisma = new PrismaClient().$extends(withAccelerate())
 
 async function main() {
   rslog.info('main')
-  // ... you will write your Prisma ORM queries here
 }
 
 main()
@@ -23,14 +22,13 @@ main()
     process.exit(1)
   })
 
-const app = new Hono()
+const app = new Hono().basePath('/api')
 
 app.use(logger((log) => {
   rslog.info(log)
 }))
 
 app.get('/', (c) => {
-  c.res.headers.set('Content-Type', 'text/plain')
   return c.text('Hello!')
 })
 

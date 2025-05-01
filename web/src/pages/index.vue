@@ -11,12 +11,12 @@ const adding = ref(false)
 
 const { data: todos, isLoading, refetch } = useQuery({
   key: () => ['todos'],
-  query: () => request('/api/todos'),
+  query: () => request('/todos'),
 })
 
 const { data: welcome } = useQuery({
   key: () => ['welcome'],
-  query: () => request('/api'),
+  query: () => request(''),
 })
 
 async function handleAdd() {
@@ -26,7 +26,7 @@ async function handleAdd() {
   }
 
   adding.value = true
-  await request('/api/todo', {
+  await request('/todo', {
     method: 'POST',
     body: {
       content: content.value,
@@ -38,7 +38,7 @@ async function handleAdd() {
 }
 
 async function handleUpdate(id: number, data: any) {
-  await request(`/api/todo/${id}`, {
+  await request(`/todo/${id}`, {
     method: 'PUT',
     body: data,
   })
@@ -74,7 +74,7 @@ async function handleUpdate(id: number, data: any) {
             <Button
               variant="outline" size="icon"
               @click="async () => {
-                await request(`/api/todo/${todo.id}`, {
+                await request(`/todo/${todo.id}`, {
                   method: 'DELETE',
                 })
                 toast.success('Delete success')
