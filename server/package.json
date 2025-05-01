@@ -2,8 +2,8 @@
   "name": "server",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "build": "tsc",
+    "dev": "tsdown --watch",
+    "build": "tsdown",
     "start": "node dist/index.js",
     "db:generate": "prisma generate --no-engine",
     "db:migrate": "prisma migrate dev",
@@ -21,6 +21,7 @@
   "devDependencies": {
     "@types/node": "^20.11.17",
     "prisma": "^6.7.0",
+    "tsdown": "^0.10.2",
     "tsx": "^4.7.1",
     "typescript": "^5.8.3"
   }
