@@ -2,6 +2,7 @@
 node_modules/
 dist/
 server/generated
+server/.env
 
 .env.local
 .dev.vars
