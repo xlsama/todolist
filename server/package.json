@@ -1,16 +1,19 @@
 {
   "name": "server",
+  "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy --minify",
-    "cf-typegen": "wrangler types --env-interface CloudflareBindings"
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.49.4",
-    "hono": "^4.7.8"
+    "@hono/node-server": "^1.14.1",
+    "hono": "^4.7.8",
+    "rslog": "^1.2.3"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250429.0",
-    "wrangler": "^4.13.2"
+    "@types/node": "^20.11.17",
+    "tsx": "^4.7.1",
+    "typescript": "^5.8.3"
   }
 }

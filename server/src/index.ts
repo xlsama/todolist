@@ -1,35 +1,22 @@
+import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 import { HTTPException } from 'hono/http-exception'
 import { logger } from 'hono/logger'
-import { getSupabaseClient, initializeSupabase } from './db'
+import { logger as rslog } from 'rslog'
 
-// Define the expected structure for environment variables
-interface Env {
-  SUPABASE_KEY: string
-}
+const app = new Hono()
 
-const app = new Hono<{ Bindings: Env }>()
-
-app.use(logger())
-
-// Middleware to initialize Supabase
-app.use(async (c, next) => {
-  try {
-    initializeSupabase(c.env)
-  }
-  catch (e) {
-    console.error('Failed to initialize Supabase:', e)
-    throw new HTTPException(500, { message: 'Internal Server Error: Database initialization failed' })
-  }
-  await next()
-})
+app.use(logger((log) => {
+  rslog.info(log)
+}))
 
 app.get('/', (c) => {
   return c.text('Hello!')
 })
 
+const supabase: any = null
+
 app.get('/todos', async (c) => {
-  const supabase = getSupabaseClient()
   const { data, error } = await supabase.from('todo').select().order('created_at', { ascending: false })
 
   if (error) {
@@ -40,7 +27,6 @@ app.get('/todos', async (c) => {
 })
 
 app.post('/todo', async (c) => {
-  const supabase = getSupabaseClient()
   const { content } = await c.req.json()
   const { data, error } = await supabase
     .from('todo')
@@ -56,7 +42,6 @@ app.post('/todo', async (c) => {
 })
 
 app.delete('/todo/:id', async (c) => {
-  const supabase = getSupabaseClient()
   const { id } = c.req.param()
   const { error } = await supabase.from('todo').delete().eq('id', id)
 
@@ -67,4 +52,9 @@ app.delete('/todo/:id', async (c) => {
   return c.json({ success: true })
 })
 
-export default app
+serve({
+  fetch: app.fetch,
+  port: 3000,
+}, (info) => {
+  rslog.success(`Server is running on http://localhost:${info.port}`)
+})
