@@ -19,7 +19,7 @@
     "rslog": "^1.2.3"
   },
   "devDependencies": {
-    "@types/node": "^20.11.17",
+    "@types/node": "^22.15.3",
     "nodemon": "^3.1.10",
     "prisma": "^6.7.0",
     "tsdown": "^0.10.2",
